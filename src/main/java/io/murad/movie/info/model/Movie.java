@@ -11,6 +11,16 @@ public class Movie {
 	@Column(name = "id")
 	private Long id;
 
+	@Column(name = "description")
+	private String description;
+
+	@Column(name = "director_name")
+	private String directorName;
+//	private String releaseCountry;
+//	private double imdbRating;
+//	private String language;
+//	private int releaseYear;
+
 	@Column(name = "movie_name")
 	private String movieName;
 	public Movie() {
@@ -34,5 +44,5 @@ public class Movie {
 		this.movieName = movieName;
 	}
 	
-	
+
 }
