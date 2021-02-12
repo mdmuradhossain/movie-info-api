@@ -1,9 +1,17 @@
 package io.murad.movie.info.model;
 
+import javax.persistence.*;
 
+@Entity
+@Table
 public class Movie {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
 	private Long id;
+
+	@Column(name = "movie_name")
 	private String movieName;
 	public Movie() {
 	
