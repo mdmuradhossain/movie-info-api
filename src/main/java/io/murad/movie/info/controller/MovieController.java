@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,7 @@ public class MovieController {
     private MovieService movieService;
 
     @GetMapping(path = "/movies")
+    @ApiOperation(value ="Finds movie by id",notes = "Provide and id to look up specific movie from Movie Info App")
     public ResponseEntity<List<Movie>> getAllMovieInfo() {
         List<Movie> movies = movieService.getMovies();
         return new ResponseEntity<>(movies, HttpStatus.OK);

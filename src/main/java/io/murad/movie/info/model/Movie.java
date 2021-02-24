@@ -3,6 +3,8 @@ package io.murad.movie.info.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -10,11 +12,13 @@ import java.util.Date;
 
 @Entity
 @Table
+@ApiModel(description = "Information about the Movie")
 public class Movie {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
+    @ApiModelProperty(notes = "The unique id of the movie")
     private Long id;
 
     @Column(name = "description", nullable = true)
