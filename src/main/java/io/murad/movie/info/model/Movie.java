@@ -32,14 +32,11 @@ public class Movie {
 
     @Column(name = "imdb_rating")
     @JsonIgnore
-//    @JsonProperty(access = JsonProperty.Access.READ_WRITE)
     private Double imdbRating;
 
     @Column(name = "language", nullable = true)
     private String language;
-    //budget
-    //boxoffice
-//    private Time streaming time
+    
     @Column(name = "trailer_link")
     private String trailerLink;
 

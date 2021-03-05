@@ -16,7 +16,6 @@ public class MovieServiceImpl implements MovieService {
     @Autowired
     private MovieRepository movieRepository;
 
-
     @Override
     public Movie saveMovieInfo(Movie movie) {
         log.info("saving movie info...");
@@ -25,7 +24,7 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie getMovieById(Long id) {
-        log.info("movie id: "+id);
+        log.info("movie id: " + id);
         return movieRepository.findById(id).get();
     }
 
@@ -37,7 +36,7 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public void deleteMovieInfo(Movie movie) {
         movieRepository.delete(movie);
-        log.info("deleted "+movie.getMovieName());
+        log.info("deleted " + movie.getMovieName());
     }
 
 }

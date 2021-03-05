@@ -9,6 +9,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+/*
+ * @author    Md Murad Hossain
+ */
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -28,10 +31,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 permitAll()
                 .and()
                 .authorizeRequests().antMatchers("/api/**").permitAll()
-        .antMatchers("/admin/**").hasRole("ADMIN").anyRequest().authenticated()
-        .and()
-        .formLogin().permitAll()
-        .and()
-        .logout();
+                .antMatchers("/admin/**").hasRole("ADMIN").anyRequest().authenticated()
+                .and()
+                .formLogin().permitAll()
+                .and()
+                .logout();
     }
 }
