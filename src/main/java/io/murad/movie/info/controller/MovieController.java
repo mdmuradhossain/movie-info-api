@@ -23,36 +23,43 @@ public class MovieController {
     private MovieService movieService;
 
     @GetMapping(path = "/movies")
-    @ApiOperation(value ="Finds movie by id",notes = "Provide and id to look up specific movie from Movie Info App")
+    @ApiOperation(value = "Finds movie by id", notes = "Provide and id to look up specific movie from Movie Info App")
     public ResponseEntity<List<Movie>> getAllMovieInfo() {
         List<Movie> movies = movieService.getMovies();
         return new ResponseEntity<>(movies, HttpStatus.OK);
     }
 
-    @PostMapping(path = "/movies")
+    @PostMapping(path = "/movies", consumes = "application/json")
+    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Movie> saveMovieInfo(@RequestBody Movie movie) throws InterruptedException, ExecutionException {
         Movie saveMovie = movieService.saveMovieInfo(movie);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(saveMovie.getId()).toUri();
+        /*Return only this is same with @ResponseStatus(HttpStatus.CREATED)
+         *return movieService.saveMovieInfo(movie);
+         *No need ResponseEntity*/
         return ResponseEntity.created(location).body(movie);
     }
 
     @GetMapping(path = "movies/{id}")
-    public Movie getMovie(@PathVariable Long id) {
-        return movieService.getMovieById(id);
+    public ResponseEntity<Movie> getMovie(@PathVariable Long id) {
+        Optional<Movie> movie = movieService.getMovieById(id);
+        return movie.map(film -> new ResponseEntity<>(film, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
     @PutMapping(path = "/movies/{id}")
     public ResponseEntity<Movie> updateMovie(@PathVariable Long id, @RequestBody Movie movie) throws InterruptedException, ExecutionException {
-        Movie movieInfo = movieService.getMovieById(id);
-        movieInfo.setMovieName(movie.getMovieName());
-        return new ResponseEntity<>(movieService.saveMovieInfo(movieInfo), HttpStatus.OK);
+        Optional<Movie> movieInfo = movieService.getMovieById(id);
+        movieInfo.get().setMovieName(movie.getMovieName());
+        return new ResponseEntity<>(movieService.saveMovieInfo(movieInfo.get()), HttpStatus.OK);
     }
 
     @DeleteMapping(path = "/movies/{id}")
+    @ResponseStatus(code=HttpStatus.NO_CONTENT)
     public ResponseEntity<?> deleteMovie(@PathVariable Long id) throws InterruptedException, ExecutionException {
-        Movie movie = movieService.getMovieById(id);
-        movieService.deleteMovieInfo(movie);
+        Optional<Movie> movie = movieService.getMovieById(id);
+        Movie rmMovie = movie.get();
+        movieService.deleteMovieInfo(rmMovie);
         return ResponseEntity.ok().build();
     }
 }
