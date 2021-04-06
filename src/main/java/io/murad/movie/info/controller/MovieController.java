@@ -17,6 +17,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController()
 @RequestMapping("/api")
+@CrossOrigin(origins = "http://localhost:8080")
 public class MovieController {
 
     @Autowired
@@ -55,11 +56,11 @@ public class MovieController {
     }
 
     @DeleteMapping(path = "/movies/{id}")
-    @ResponseStatus(code=HttpStatus.NO_CONTENT)
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public ResponseEntity<?> deleteMovie(@PathVariable Long id) throws InterruptedException, ExecutionException {
         Optional<Movie> movie = movieService.getMovieById(id);
         Movie rmMovie = movie.get();
         movieService.deleteMovieInfo(rmMovie);
-        return ResponseEntity.ok().build();
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

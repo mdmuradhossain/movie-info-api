@@ -146,7 +146,7 @@ public class Movie implements Serializable {
         if (this == o) return true;
         if (!(o instanceof Movie)) return false;
         Movie movie = (Movie) o;
-        return getId().equals(movie.getId()) && getMovieName().equals(movie.getMovieName()) && getDescription().equals(movie.getDescription()) && getDirectorName().equals(movie.getDirectorName()) && getReleaseCountry().equals(movie.getReleaseCountry()) && getImdbRating().equals(movie.getImdbRating()) && getLanguage().equals(movie.getLanguage()) && getTrailerLink().equals(movie.getTrailerLink()) && getReleaseDate().equals(movie.getReleaseDate()) && thumbnailUrl.equals(movie.thumbnailUrl);
+        return Objects.equals(getId(), movie.getId()) && Objects.equals(getMovieName(), movie.getMovieName()) && Objects.equals(getDescription(), movie.getDescription()) && Objects.equals(getDirectorName(), movie.getDirectorName()) && Objects.equals(getReleaseCountry(), movie.getReleaseCountry()) && Objects.equals(getImdbRating(), movie.getImdbRating()) && Objects.equals(getLanguage(), movie.getLanguage()) && Objects.equals(getTrailerLink(), movie.getTrailerLink()) && Objects.equals(getReleaseDate(), movie.getReleaseDate()) && Objects.equals(thumbnailUrl, movie.thumbnailUrl);
     }
 
     @Override
