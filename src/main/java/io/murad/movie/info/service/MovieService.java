@@ -9,7 +9,7 @@ import io.murad.movie.info.model.Movie;
 public interface MovieService {
 
 	public Movie saveMovieInfo(Movie movie) throws InterruptedException, ExecutionException;
-	public Movie getMovieById(Long id);
+	public Optional<Movie> getMovieById(Long id);
 	public List<Movie> getMovies();
 	public void deleteMovieInfo(Movie movie);
 
